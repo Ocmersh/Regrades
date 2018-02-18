@@ -169,13 +169,13 @@ namespace Dependencies
 
             //removes the key if located in dependee graph
             if (dependees.ContainsKey(s))
-                if (dependees.ContainsKey(s)) //CHANGE TO: dependees[s].Remove(t);
-                    dependees[s].Remove(t);    //CHANGE TO: if (dependees[s].Count == 0) dependees.Remove(s);
+                if (dependees.ContainsKey(s)) 
+                    dependees[s].Remove(t);    
 
             //removes the key if located in the dependent graph
             if (dependents.ContainsKey(t))
-                if (dependents.ContainsKey(t)) //CHANGE TO: dependents[t].Remove(s);
-                    dependents[t].Remove(s);   // if (dependents[t].Count == 0) dependents.Remove(t);
+                if (dependents.ContainsKey(t)) 
+                    dependents[t].Remove(s);   
 
         }
 
@@ -184,7 +184,7 @@ namespace Dependencies
         /// t in newDependents, adds the dependency (s,t).
         /// Requires s != null and t != null.
         /// </summary>
-        public void ReplaceDependents(string s, IEnumerable<string> newDependents) //multiple changes.
+        public void ReplaceDependents(string s, IEnumerable<string> newDependents) 
         {
             //update dependee graph
             foreach (string key in newDependents)
@@ -199,7 +199,7 @@ namespace Dependencies
         /// s in newDependees, adds the dependency (s,t).
         /// Requires s != null and t != null.
         /// </summary>
-        public void ReplaceDependees(string t, IEnumerable<string> newDependees) //multiple changes
+        public void ReplaceDependees(string t, IEnumerable<string> newDependees) 
         {
             //update dependent graph
             foreach (string key in newDependees)
