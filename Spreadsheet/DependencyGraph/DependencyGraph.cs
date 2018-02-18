@@ -165,18 +165,21 @@ namespace Dependencies
         /// </summary>
         public void RemoveDependency(string s, string t)
         {
-            //ADD: if (dependees.Count == 0 || dependents.Count == 0) return;
+            if (dependees.Count == 0 || dependents.Count == 0) return;
 
             //removes the key if located in dependee graph
             if (dependees.ContainsKey(s))
-                if (dependees.ContainsKey(s)) //CHANGE TO: dependees[s].Remove(t);
-                    dependees[s].Remove(t);    //CHANGE TO: if (dependees[s].Count == 0) dependees.Remove(s);
+            {
+                dependees[s].Remove(t);
+                if (dependees[s].Count == 0) dependees.Remove(s);
+            }
 
             //removes the key if located in the dependent graph
             if (dependents.ContainsKey(t))
-                if (dependents.ContainsKey(t)) //CHANGE TO: dependents[t].Remove(s);
-                    dependents[t].Remove(s);   // if (dependents[t].Count == 0) dependents.Remove(t);
-
+            {
+                dependents[t].Remove(s);
+                if (dependents[t].Count == 0) dependents.Remove(t);
+            }
         }
 
         /// <summary>
