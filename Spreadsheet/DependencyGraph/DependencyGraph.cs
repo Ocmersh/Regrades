@@ -123,7 +123,7 @@ namespace Dependencies
             if (dependees.ContainsKey(s))
                 return dependees[s];
             else
-                return null; // CHANGE TO: return new HashSet<string>();
+                return new HashSet<string>(); // CHANGE TO: return new HashSet<string>();
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace Dependencies
             if (dependents.ContainsKey(s))
                 return dependents[s];
             else
-                return null; // CHANGE TO: return new HashSet<string>();
+                return new HashSet<string>(); // CHANGE TO: return new HashSet<string>();
         }
 
         /// <summary>
