@@ -184,7 +184,7 @@ namespace Dependencies
         /// t in newDependents, adds the dependency (s,t).
         /// Requires s != null and t != null.
         /// </summary>
-        public void ReplaceDependents(string s, IEnumerable<string> newDependents)
+        public void ReplaceDependents(string s, IEnumerable<string> newDependents) //multiple changes.
         {
             //update dependee graph
             foreach (string key in newDependents)
@@ -199,7 +199,7 @@ namespace Dependencies
         /// s in newDependees, adds the dependency (s,t).
         /// Requires s != null and t != null.
         /// </summary>
-        public void ReplaceDependees(string t, IEnumerable<string> newDependees)
+        public void ReplaceDependees(string t, IEnumerable<string> newDependees) //multiple changes
         {
             //update dependent graph
             foreach (string key in newDependees)
