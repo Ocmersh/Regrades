@@ -186,12 +186,30 @@ namespace Dependencies
         /// </summary>
         public void ReplaceDependents(string s, IEnumerable<string> newDependents)
         {
-            //update dependee graph
-            foreach (string key in newDependents)
-                RemoveDependency(key, s);
+            HashSet<string> newDependentList = new HashSet<string>(newDependents);
+            if (dependees.ContainsKey(s))
+            {
+                if (newDependentList.Count == 0)
+                {
+                    dependees.Remove(s);
+                    return;
+                }
 
-            //reset dependents to new values of given key
-            dependees[s] = new HashSet<string>(newDependents);
+                //remove empty elements
+                foreach (var dependent in dependees[s])
+                {
+                    dependents[dependent].Remove(s);
+                    if (dependents[dependent].Count == 0) dependents.Remove(dependent);
+                }
+
+                //reset dependents to new values of given key
+                dependees[s] = new HashSet<string>();
+            }
+
+            foreach (var newDependent in newDependentList)
+            {
+                AddDependency(s, newDependent);
+            }
         }
 
         /// <summary>
@@ -201,12 +219,30 @@ namespace Dependencies
         /// </summary>
         public void ReplaceDependees(string t, IEnumerable<string> newDependees)
         {
-            //update dependent graph
-            foreach (string key in newDependees)
-                RemoveDependency(key, t);
+            HashSet<string> newDependeeList = new HashSet<string>(newDependees);
+            if (dependents.ContainsKey(t))
+            {
+                if (newDependeeList.Count == 0)
+                {
+                    dependents.Remove(t);
+                    return;
+                }
 
-            //reset dependees to new values of given key
-            dependents[t] = new HashSet<string>(newDependees);
+                //remove empty elements
+                foreach (var dependee in dependents[t])
+                {
+                    dependees[dependee].Remove(t);
+                    if (dependees[dependee].Count == 0) dependees.Remove(dependee);
+                }
+
+                //reset dependees to new values of given key
+                dependents[t] = new HashSet<string>();
+            }
+
+            foreach (var newDependee in newDependeeList)
+            {
+                AddDependency(newDependee, t);
+            }
         }
 
     }
